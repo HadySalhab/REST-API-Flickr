@@ -10,6 +10,7 @@ object ServiceGenerator {
 
     private val retrofit = retrofitBuilder.build()
 
+    //retrofit knows how to create an instance of the flickrApi interface
     val flickrApi = retrofit.create(FlickrApi::class.java)
 
 }

@@ -1,21 +1,25 @@
 package com.android.flickphoto.requests
 
-import com.android.flickphoto.requests.responses.PhotosResponse
+import com.android.flickphoto.requests.responses.FlickrResponse
+import com.android.flickphoto.requests.responses.PhotoResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface FlickrApi {
+//search and getrecent requests return the same type of responses
+
+
 
     @GET("services/rest")
     fun searchPhotos(
         @Query("api_key") apiKey: String = "75ec5012a10f8767d1716ce6082843de",
         @Query("method") method: String = "flickr.photos.search",
-        @Query("text") text: String,
+        @Query("text") text: String="",
         @Query("nojsoncallback") noJsonCallBack: String = "1",
         @Query("format") responseFormat: String = "json",
         @Query("extras") extras: String = "url_s,date_taken,owner_name"
-    ): Call<PhotosResponse>
+    ): Call<FlickrResponse>
 
     @GET("services/rest")
     fun getRecentPhotos(
@@ -24,6 +28,6 @@ interface FlickrApi {
         @Query("nojsoncallback") noJsonCallBack: String = "1",
         @Query("format") responseFormat: String = "json",
         @Query("extras") extras: String = "url_s,date_taken,owner_name"
-    ): Call<PhotosResponse>
+    ): Call<FlickrResponse>
 
 }

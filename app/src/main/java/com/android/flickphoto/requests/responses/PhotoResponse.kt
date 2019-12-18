@@ -7,17 +7,10 @@ import com.google.gson.annotations.SerializedName
 
 
 //Both Search & Recent
-class PhotosResponse {
+class PhotoResponse {
     @SerializedName("photo")
     @Expose()
-    private var _Photos: List<Photo> =  emptyList()
-
-    val Photos : List<Photo>
-        get() = _Photos
-
-    override fun toString(): String {
-        return "RecentPhotosResponse(_recentPhotos=$_Photos)"
-    }
+   lateinit var listOfPhoto:List<Photo>
 
 
 }
