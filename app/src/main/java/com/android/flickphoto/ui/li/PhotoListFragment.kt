@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.android.flickphoto.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,8 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhotoListFragment : Fragment() {
 
-private val photoListViewModel by viewModel<PhotoListViewModel>()
-
+private val photoListViewModel:PhotoListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +28,7 @@ private val photoListViewModel by viewModel<PhotoListViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         photoListViewModel.photos.observe(viewLifecycleOwner, Observer {photo->
-            
+
         })
     }
 
