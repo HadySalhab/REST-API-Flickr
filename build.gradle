@@ -29,4 +29,12 @@ task clean(type: Delete) {
 
 ext{
     retrofit_version='2.3.0'
+    recyclerview_version = "1.1.0"
+    material_version='1.1.0-beta02'
+    room_version = "2.2.2"
+    lifecycle_version = "2.1.0"
+    koin_version = "2.0.1"
+    preference_version = "1.1.0"
+    nav_version = "2.1.0"
+    paging_version = "2.1.0"
 }
