@@ -17,15 +17,8 @@ private const val TAG = "FlickrApiClient"
 
 class FlickrApiClient {
 
-
-
-
-
     //creating an instance of the flickrAPI
     val flickrApi = ServiceGenerator.flickrApi
-
-
-
 
     suspend fun getPhotos():LiveData<List<Photo>>{
         return fetchPhotoMetaData(flickrApi.getRecentPhotos())
@@ -34,17 +27,6 @@ class FlickrApiClient {
     suspend fun searchPhotos(query:String):LiveData<List<Photo>>{
         return fetchPhotoMetaData(flickrApi.searchPhotos(text=query))
     }
-    
-
-
-
-
-
-
-
-
-
-
 
 
     suspend fun fetchPhotoMetaData(flickrRequest:Deferred<Response<FlickrResponse?>>): LiveData<List<Photo>> {
@@ -92,11 +74,6 @@ class FlickrApiClient {
         return responseLiveData
 
     }
-
-
-
-
-
 
 
 }
