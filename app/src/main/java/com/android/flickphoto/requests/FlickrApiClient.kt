@@ -1,8 +1,6 @@
 package com.android.flickphoto.requests
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.android.flickphoto.models.Photo
 import com.android.flickphoto.requests.responses.FlickrResponse
 import com.android.flickphoto.util.NETWORK_TIMEOUT
@@ -20,17 +18,17 @@ class FlickrApiClient {
     //creating an instance of the flickrAPI
     val flickrApi = ServiceGenerator.flickrApi
 
-    suspend fun getPhotos():LiveData<List<Photo>>{
+    suspend fun getPhotos():List<Photo>{
         return fetchPhotoMetaData(flickrApi.getRecentPhotos())
     }
 
-    suspend fun searchPhotos(query:String):LiveData<List<Photo>>{
+    suspend fun searchPhotos(query:String):List<Photo>{
         return fetchPhotoMetaData(flickrApi.searchPhotos(text=query))
     }
 
 
-    suspend fun fetchPhotoMetaData(flickrRequest:Deferred<Response<FlickrResponse?>>): LiveData<List<Photo>> {
-        val responseLiveData: MutableLiveData<List<Photo>> = MutableLiveData()
+    suspend fun fetchPhotoMetaData(flickrRequest:Deferred<Response<FlickrResponse?>>): List<Photo> {
+        var responseList: List<Photo> = emptyList()
 
 
         try {
@@ -45,9 +43,9 @@ class FlickrApiClient {
                         val photoResponse = flickrResponse?.photos
                         val listOfPhotos = photoResponse?.listOfPhoto ?: mutableListOf()
                         val listOfPhotosWithUrl = listOfPhotos.filterNot {
-                            it.url.isBlank()
+                            it.url.isNullOrBlank()
                         }
-                       responseLiveData.value = listOfPhotosWithUrl
+                       responseList = listOfPhotosWithUrl
                     } else {
                         //if response was successful but not OK(CODE!=200)
                         try {
@@ -67,11 +65,11 @@ class FlickrApiClient {
         }
 
         //catching the timeoutCancellation exception to inform the user
-        catch (e: TimeoutCancellationException) {
+        catch (e:TimeoutCancellationException) {
             Log.e(TAG, "We got a timeoutCancellationException")
         }
 
-        return responseLiveData
+        return responseList
 
     }
 

@@ -2,18 +2,35 @@
 
 
 <!-- TODO: Update blank fragment layout -->
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/photos_recyclerview"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    app:spanCount="2"
-    tools:context=".ui.li.PhotoListFragment"
-    tools:itemCount="16"
-    tools:listitem="@layout/grid_view_item" />
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.android.flickphoto.ui.li.PhotoListViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photos_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="4dp"
+            android:background="@color/lightGrey"
+            android:paddingEnd="4dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:listData="@{viewModel.photos}"
+            app:spanCount="2"
+            tools:context=".ui.li.PhotoListFragment"
+            tools:itemCount="16"
+            tools:listitem="@layout/grid_view_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
 

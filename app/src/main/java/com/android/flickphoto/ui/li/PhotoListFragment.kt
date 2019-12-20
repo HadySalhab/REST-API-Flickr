@@ -2,12 +2,14 @@ package com.android.flickphoto.ui.li
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.android.flickphoto.R
+import com.android.flickphoto.databinding.FragmentPhotoListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -16,20 +18,23 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhotoListFragment : Fragment() {
 
-private val photoListViewModel:PhotoListViewModel by viewModel()
-
+    private val photoListViewModel: PhotoListViewModel by viewModel()
+    private lateinit var binding: FragmentPhotoListBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_photo_list, container, false)
+        binding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_photo_list, container, false)
+        binding.viewModel = photoListViewModel
+        binding.setLifecycleOwner(this.viewLifecycleOwner)
+        binding.photosRecyclerview.adapter = PhotoListAdapter()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        photoListViewModel.photos.observe(viewLifecycleOwner, Observer {photo->
 
-        })
     }
 
 

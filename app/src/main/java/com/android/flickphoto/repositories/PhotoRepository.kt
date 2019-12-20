@@ -8,11 +8,11 @@ import com.android.flickphoto.requests.FlickrApiClient
 class PhotoRepository (private val flickrApiClient: FlickrApiClient) {
 
 
-    suspend fun fetchPhotos():LiveData<List<Photo>>{
+    suspend fun fetchPhotos():List<Photo>{
         return flickrApiClient.getPhotos()
     }
 
-    suspend fun searchPhotos(query:String):LiveData<List<Photo>>{
+    suspend fun searchPhotos(query:String):List<Photo>{
         return flickrApiClient.searchPhotos(query)
     }
 
