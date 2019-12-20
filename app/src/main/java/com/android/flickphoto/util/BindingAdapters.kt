@@ -1,11 +1,13 @@
 package com.android.flickphoto.util
 
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.flickphoto.R
 import com.android.flickphoto.models.Photo
+import com.android.flickphoto.ui.li.FlickrApiStatus
 import com.android.flickphoto.ui.li.PhotoListAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -26,5 +28,22 @@ fun ImageView.bindImage(imgUrl:String?){
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.ic_broken_image)
             ).into(this)
+    }
+}
+
+@BindingAdapter("flickrApiStatus")
+fun bindStatus(statusImageView: ImageView, status: FlickrApiStatus?) {
+    when (status) {
+        FlickrApiStatus.LOADING -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.loading_animation)
+        }
+        FlickrApiStatus.ERROR -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        FlickrApiStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
     }
 }

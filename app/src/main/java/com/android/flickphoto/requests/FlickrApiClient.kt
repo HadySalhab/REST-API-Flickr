@@ -1,9 +1,12 @@
 package com.android.flickphoto.requests
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.android.flickphoto.models.Photo
 import com.android.flickphoto.requests.responses.FlickrResponse
 import com.android.flickphoto.util.NETWORK_TIMEOUT
+import com.android.flickphoto.util.Resource
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
@@ -18,17 +21,25 @@ class FlickrApiClient {
     //creating an instance of the flickrAPI
     val flickrApi = ServiceGenerator.flickrApi
 
-    suspend fun getPhotos():List<Photo>{
-        return fetchPhotoMetaData(flickrApi.getRecentPhotos())
+    private val _result = MutableLiveData<Resource<List<Photo>>>()
+    val result :LiveData<Resource<List<Photo>>>
+    get() = _result
+
+
+
+
+
+    suspend fun getPhotos(){
+         fetchPhotoMetaData(flickrApi.getRecentPhotos())
     }
 
-    suspend fun searchPhotos(query:String):List<Photo>{
-        return fetchPhotoMetaData(flickrApi.searchPhotos(text=query))
+    suspend fun searchPhotos(query:String){
+         fetchPhotoMetaData(flickrApi.searchPhotos(text=query))
     }
 
 
-    suspend fun fetchPhotoMetaData(flickrRequest:Deferred<Response<FlickrResponse?>>): List<Photo> {
-        var responseList: List<Photo> = emptyList()
+    suspend fun fetchPhotoMetaData(flickrRequest:Deferred<Response<FlickrResponse?>>) {
+        _result.value = Resource.Loading()
 
 
         try {
@@ -45,9 +56,11 @@ class FlickrApiClient {
                         val listOfPhotosWithUrl = listOfPhotos.filterNot {
                             it.url.isNullOrBlank()
                         }
-                       responseList = listOfPhotosWithUrl
+                        _result.value = Resource.Success(listOfPhotosWithUrl)
+
                     } else {
                         //if response was successful but not OK(CODE!=200)
+                        _result.value= Resource.Error("Response successful but code different than 200")
                         try {
                             Log.d(TAG, "onResponse ${response.errorBody()}")
                         } catch (e: IOException) {
@@ -57,7 +70,7 @@ class FlickrApiClient {
                 }
                 // catching the exception if the http request is failed
                 catch (e: Exception) {
-                    Log.e(TAG, "Failed to fetch photos", e)
+                    _result.value= Resource.Error("Failed to fetch photos")
 
                 }
             }
@@ -66,10 +79,9 @@ class FlickrApiClient {
 
         //catching the timeoutCancellation exception to inform the user
         catch (e:TimeoutCancellationException) {
-            Log.e(TAG, "We got a timeoutCancellationException")
+            _result.value= Resource.Error("Network timed out")
         }
 
-        return responseList
 
     }
 
