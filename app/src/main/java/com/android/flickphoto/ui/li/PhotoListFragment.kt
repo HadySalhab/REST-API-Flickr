@@ -3,10 +3,14 @@ package com.android.flickphoto.ui.li
 
 import android.os.Bundle
 import android.view.*
+import android.view.MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.android.flickphoto.R
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.getSystemService
+import androidx.core.view.MenuItemCompat
 import androidx.lifecycle.Observer
 import com.android.flickphoto.databinding.FragmentPhotoListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -68,6 +72,9 @@ class PhotoListFragment : Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     photoListViewModel.changeQueryValue(query?:"")
+                    onActionViewCollapsed()
+                    searchItem.collapseActionView()
+                    hideSoftKeyboard()
                     return true
                 }
 
@@ -81,6 +88,17 @@ class PhotoListFragment : Fragment() {
             }
 
 
+        }
+
+    }
+    fun hideSoftKeyboard(){
+        view?.let {
+            val imm = context?.getSystemService<InputMethodManager>()
+
+            imm?.hideSoftInputFromWindow(
+                it.windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS
+            )
         }
     }
 
