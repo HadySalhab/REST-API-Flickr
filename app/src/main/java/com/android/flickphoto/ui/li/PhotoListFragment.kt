@@ -50,6 +50,17 @@ class PhotoListFragment : Fragment() {
         setUpSearchViewListener(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.menu_item_clear->{
+                photoListViewModel.changeQueryValue("")
+                true
+            }
+            else->super.onOptionsItemSelected(item)
+
+        }
+            }
+
     private fun setUpSearchViewListener(menu: Menu) {
         val searchItem: MenuItem = menu.findItem(R.id.menu_item_search)
         val searchView = searchItem.actionView as SearchView
@@ -65,6 +76,9 @@ class PhotoListFragment : Fragment() {
                 }
 
             })
+            setOnSearchClickListener {
+                searchView.setQuery(photoListViewModel.query.value?:"",false)
+            }
 
 
         }

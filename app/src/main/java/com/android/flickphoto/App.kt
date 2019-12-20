@@ -13,7 +13,7 @@ import org.koin.dsl.module
 class App : Application() {
     private val koinModule = module {
         viewModel {
-            PhotoListViewModel(get())
+            PhotoListViewModel(get(),this@App)
         }
         single {
             PhotoRepository(get())

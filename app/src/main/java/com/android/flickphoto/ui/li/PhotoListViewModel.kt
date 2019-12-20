@@ -1,16 +1,16 @@
 package com.android.flickphoto.ui.li
 
+import android.app.Application
+import android.content.Context
 import android.text.TextUtils
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.android.flickphoto.models.Photo
 import com.android.flickphoto.repositories.PhotoRepository
+import com.android.flickphoto.util.PreferencesStorage
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class PhotoListViewModel(private val photoRepository: PhotoRepository) : ViewModel() {
+class PhotoListViewModel(private val photoRepository: PhotoRepository,private val app: Application) : AndroidViewModel(app) {
 
 
 
@@ -18,7 +18,7 @@ class PhotoListViewModel(private val photoRepository: PhotoRepository) : ViewMod
     val photos: LiveData<List<Photo>>
         get() = _photos
 
-    private val _query = MutableLiveData<String>("")
+    private val _query = MutableLiveData<String>(PreferencesStorage.getStoredQuery(app))
     val query:LiveData<String>
     get() = _query
 
@@ -40,6 +40,7 @@ class PhotoListViewModel(private val photoRepository: PhotoRepository) : ViewMod
 
     }
     fun changeQueryValue(query:String){
+        PreferencesStorage.setStoredQuery(app,query)
         _query.value = query
     }
 
