@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.android.flickphoto.models.Photo
 import com.android.flickphoto.repositories.PhotoRepository
 import kotlinx.coroutines.async
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -28,6 +29,11 @@ class PhotoListViewModel (private val photoRepository:PhotoRepository) : ViewMod
 
         }
 
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
     }
 
 
