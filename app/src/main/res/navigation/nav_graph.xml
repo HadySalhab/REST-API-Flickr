@@ -10,5 +10,18 @@
         android:id="@+id/photoListFragment"
         android:name="com.android.flickphoto.ui.li.PhotoListFragment"
         android:label="Flickr"
-        tools:layout="@layout/fragment_photo_list" />
+        tools:layout="@layout/fragment_photo_list" >
+        <action
+            android:id="@+id/action_photoListFragment_to_displayPhotoFragment"
+            app:destination="@+id/displayPhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayPhotoFragment"
+        android:name="com.android.flickphoto.ui.Display.DisplayPhotoFragment"
+        android:label="Flickr"
+        tools:layout="@layout/fragment_display_photo" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>
