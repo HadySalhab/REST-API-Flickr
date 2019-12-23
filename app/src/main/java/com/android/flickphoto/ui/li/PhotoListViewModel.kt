@@ -66,7 +66,7 @@ class PhotoListViewModel(private val photoRepository: PhotoRepository,private va
     }
 
 
-    
+
     fun changeQueryValue(query:String){
         PreferencesStorage.setStoredQuery(app,query)
         _query.value = query
