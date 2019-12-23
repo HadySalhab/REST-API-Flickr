@@ -7,6 +7,9 @@
         <variable
             name="photo"
             type="com.android.flickphoto.models.Photo" />
+        <variable
+            name="viewHolder"
+            type="com.android.flickphoto.ui.li.PhotoListAdapter.PhotoListViewHolder" />
 
     </data>
 
@@ -16,6 +19,7 @@
         app:cardCornerRadius="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->viewHolder.displayPhoto.invoke(photo)}"
         android:clickable="true"
         android:focusable="true">
 

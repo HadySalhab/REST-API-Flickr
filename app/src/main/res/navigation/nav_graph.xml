@@ -21,7 +21,7 @@
         android:label="Flickr"
         tools:layout="@layout/fragment_display_photo" >
         <argument
-            android:name="id"
-            app:argType="string" />
+            android:name="photo"
+            app:argType="com.android.flickphoto.models.Photo" />
     </fragment>
 </navigation>

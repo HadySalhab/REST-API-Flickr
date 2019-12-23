@@ -12,7 +12,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.getSystemService
 import androidx.core.view.MenuItemCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.android.flickphoto.databinding.FragmentPhotoListBinding
+import com.android.flickphoto.models.Photo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -20,6 +23,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 
 class PhotoListFragment : Fragment() {
+    private lateinit var  navController :NavController
+    private val displayPhoto:(Photo)->Unit={photo->
+       val action = PhotoListFragmentDirections.actionPhotoListFragmentToDisplayPhotoFragment(photo)
+        navController.navigate(action)
+
+    }
+
 
     private val photoListViewModel: PhotoListViewModel by viewModel()
     private lateinit var binding: FragmentPhotoListBinding
@@ -36,7 +46,8 @@ class PhotoListFragment : Fragment() {
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_photo_list, container, false)
         binding.viewModel = photoListViewModel
         binding.setLifecycleOwner(this.viewLifecycleOwner)
-        binding.photosRecyclerview.adapter = PhotoListAdapter()
+        binding.photosRecyclerview.adapter = PhotoListAdapter(displayPhoto)
+        navController= findNavController()
         return binding.root
     }
 

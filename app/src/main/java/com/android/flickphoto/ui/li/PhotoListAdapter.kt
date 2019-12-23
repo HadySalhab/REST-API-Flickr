@@ -10,26 +10,27 @@ import com.android.flickphoto.R
 import com.android.flickphoto.databinding.GridViewItemBinding
 import com.android.flickphoto.models.Photo
 
-class PhotoListAdapter : ListAdapter<Photo,PhotoListAdapter.PhotoListViewHolder>(PhotoDiffUtil()){
+class PhotoListAdapter (private val displayPhoto:(Photo)->Unit) : ListAdapter<Photo,PhotoListAdapter.PhotoListViewHolder>(PhotoDiffUtil()){
 
 
-    class PhotoListViewHolder(private val binding:GridViewItemBinding):RecyclerView.ViewHolder(binding.root){
+    class PhotoListViewHolder private constructor(private val binding:GridViewItemBinding, val displayPhoto:(Photo)->Unit):RecyclerView.ViewHolder(binding.root){
         companion object{
-            fun getInstance(parent:ViewGroup):PhotoListViewHolder{
+            fun getInstance(parent:ViewGroup,displayPhoto: (Photo) -> Unit):PhotoListViewHolder{
                 val inflater = LayoutInflater.from(parent.context)
                 val photoItemBinding = DataBindingUtil.inflate<GridViewItemBinding>(inflater, R.layout.grid_view_item,parent,false)
-                return PhotoListViewHolder(photoItemBinding)
+                return PhotoListViewHolder(photoItemBinding,displayPhoto)
             }
         }
         fun bind(photo:Photo){
             binding.photo = photo
+            binding.viewHolder = this
         }
 
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoListViewHolder {
-        return PhotoListViewHolder.getInstance(parent)
+        return PhotoListViewHolder.getInstance(parent,displayPhoto)
 
     }
 
