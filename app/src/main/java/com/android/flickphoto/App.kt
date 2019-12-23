@@ -1,8 +1,10 @@
 package com.android.flickphoto
 
 import android.app.Application
+import com.android.flickphoto.models.Photo
 import com.android.flickphoto.repositories.PhotoRepository
 import com.android.flickphoto.requests.FlickrApiClient
+import com.android.flickphoto.ui.display.DisplayPhotoViewModel
 import com.android.flickphoto.ui.li.PhotoListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -15,6 +17,12 @@ class App : Application() {
         viewModel {
             PhotoListViewModel(get(),this@App)
         }
+
+        viewModel {
+            (photo:Photo)->DisplayPhotoViewModel(photo)
+        }
+
+
         single {
             PhotoRepository(get())
         }
