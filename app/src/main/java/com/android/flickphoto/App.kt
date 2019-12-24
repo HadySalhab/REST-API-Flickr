@@ -19,7 +19,7 @@ class App : Application() {
         }
 
         viewModel {
-            (photo:Photo)->DisplayPhotoViewModel(photo)
+            (photo:Photo)->DisplayPhotoViewModel(photo,get ())
         }
 
 

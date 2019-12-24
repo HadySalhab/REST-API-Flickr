@@ -1,9 +1,16 @@
 package com.android.flickphoto.util
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.android.flickphoto.R
 import com.android.flickphoto.models.Photo
@@ -11,6 +18,8 @@ import com.android.flickphoto.ui.li.FlickrApiStatus
 import com.android.flickphoto.ui.li.PhotoListAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 
 @BindingAdapter("listData")
 fun RecyclerView.bindRecyclerView(data:List<Photo>?){
@@ -47,3 +56,6 @@ fun bindStatus(statusImageView: ImageView, status: FlickrApiStatus?) {
         }
     }
 }
+
+
+

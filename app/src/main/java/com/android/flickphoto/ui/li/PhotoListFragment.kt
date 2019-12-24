@@ -3,17 +3,15 @@ package com.android.flickphoto.ui.li
 
 import android.os.Bundle
 import android.view.*
-import android.view.MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
 import android.view.inputmethod.InputMethodManager
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import com.android.flickphoto.R
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.getSystemService
-import androidx.core.view.MenuItemCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.android.flickphoto.R
 import com.android.flickphoto.databinding.FragmentPhotoListBinding
 import com.android.flickphoto.models.Photo
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,16 +21,19 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 
 class PhotoListFragment : Fragment() {
-    private lateinit var  navController :NavController
-    private val displayPhoto:(Photo)->Unit={photo->
-       val action = PhotoListFragmentDirections.actionPhotoListFragmentToDisplayPhotoFragment(photo)
-        navController.navigate(action)
-
-    }
+    private lateinit var navController: NavController
 
 
     private val photoListViewModel: PhotoListViewModel by viewModel()
     private lateinit var binding: FragmentPhotoListBinding
+
+
+    private val displayPhoto: (Photo) -> Unit = { photo ->
+        val action = PhotoListFragmentDirections.actionPhotoListFragmentToDisplayPhotoFragment(photo)
+        navController.navigate(action)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -47,13 +48,13 @@ class PhotoListFragment : Fragment() {
         binding.viewModel = photoListViewModel
         binding.setLifecycleOwner(this.viewLifecycleOwner)
         binding.photosRecyclerview.adapter = PhotoListAdapter(displayPhoto)
-        navController= findNavController()
+        navController = findNavController()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        photoListViewModel.query.observe(viewLifecycleOwner, Observer{query->
+        photoListViewModel.query.observe(viewLifecycleOwner, Observer { query ->
             photoListViewModel.getFlickrPhotos(query)
         })
 
@@ -66,15 +67,15 @@ class PhotoListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.menu_item_clear->{
+        return when (item.itemId) {
+            R.id.menu_item_clear -> {
                 photoListViewModel.changeQueryValue("")
                 true
             }
-            else->super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
 
         }
-            }
+    }
 
     private fun setUpSearchViewListener(menu: Menu) {
         val searchItem: MenuItem = menu.findItem(R.id.menu_item_search)
@@ -82,7 +83,7 @@ class PhotoListFragment : Fragment() {
         searchView.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    photoListViewModel.changeQueryValue(query?:"")
+                    photoListViewModel.changeQueryValue(query ?: "")
                     onActionViewCollapsed()
                     searchItem.collapseActionView()
                     hideSoftKeyboard()
@@ -95,14 +96,15 @@ class PhotoListFragment : Fragment() {
 
             })
             setOnSearchClickListener {
-                searchView.setQuery(photoListViewModel.query.value?:"",false)
+                searchView.setQuery(photoListViewModel.query.value ?: "", false)
             }
 
 
         }
 
     }
-    fun hideSoftKeyboard(){
+
+    fun hideSoftKeyboard() {
         view?.let {
             val imm = context?.getSystemService<InputMethodManager>()
 

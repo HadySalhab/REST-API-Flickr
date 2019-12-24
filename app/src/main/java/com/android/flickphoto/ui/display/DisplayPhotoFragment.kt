@@ -32,8 +32,12 @@ class DisplayPhotoFragment : Fragment() {
         binding = DataBindingUtil.inflate(layoutInflater,R.layout.fragment_display_photo,container,false)
         binding.viewModel = displayViewModel
         // Inflate the layout for this fragment
+        binding.setLifecycleOwner(this.viewLifecycleOwner)
         return binding.root
     }
+
+
+
 
 
 }

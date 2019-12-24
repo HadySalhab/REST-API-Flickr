@@ -93,4 +93,7 @@ dependencies {
     //preference
     implementation "androidx.preference:preference-ktx:$preference_version"
 
+    //palette
+    implementation "androidx.palette:palette:$palette_version"
+
 }
