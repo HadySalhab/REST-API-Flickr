@@ -40,7 +40,6 @@ class PhotoListViewModel(private val photoRepository: PhotoRepository,private va
             }
             is Resource.Error->{
                 FlickrApiStatus.ERROR
-
             }
         }
     }
