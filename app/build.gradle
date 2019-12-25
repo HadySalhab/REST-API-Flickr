@@ -96,4 +96,7 @@ dependencies {
     //palette
     implementation "androidx.palette:palette:$palette_version"
 
+    //paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
 }

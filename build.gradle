@@ -46,4 +46,5 @@ ext{
     paging_version = "2.1.0"
     preference_version = "1.1.0"
     palette_version="1.0.0"
+    paging_version = "2.1.1"
 }

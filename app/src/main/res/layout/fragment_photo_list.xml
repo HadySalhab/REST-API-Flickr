@@ -27,8 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:listData="@{viewModel.photos}"
-            app:spanCount="2"
             tools:context=".ui.li.PhotoListFragment"
+            app:spanCount="@integer/grid_span"
             tools:itemCount="16"
             tools:listitem="@layout/grid_view_item" />
 

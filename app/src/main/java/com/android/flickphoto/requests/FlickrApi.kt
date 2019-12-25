@@ -32,7 +32,8 @@ interface FlickrApi {
         @Query("method") method: String = "flickr.photos.getRecent",
         @Query("nojsoncallback") noJsonCallBack: String = "1",
         @Query("format") responseFormat: String = "json",
-        @Query("extras") extras: String = "url_s,date_taken,owner_name"
+        @Query("extras") extras: String = "url_s,date_taken,owner_name",
+        @Query("page") page:Int
     ): Deferred<Response<FlickrResponse?>> //setting retrofit to return Deferred which represents
     //a Job with a result
 

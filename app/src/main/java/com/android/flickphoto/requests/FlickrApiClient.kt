@@ -29,8 +29,8 @@ class FlickrApiClient {
 
 
 
-    suspend fun getPhotos(){
-         fetchPhotoMetaData(flickrApi.getRecentPhotos())
+    suspend fun getPhotos(page:Int=1){
+         fetchPhotoMetaData(flickrApi.getRecentPhotos(page = page))
     }
 
     suspend fun searchPhotos(query:String){
