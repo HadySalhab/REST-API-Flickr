@@ -26,6 +26,10 @@ class PhotoListViewModel(private val photoRepository: PhotoRepository,private va
     val query:LiveData<String>
         get() = _query
 
+    var isUserSearching = false
+
+
+
 
 
     // http request response status
@@ -51,12 +55,13 @@ class PhotoListViewModel(private val photoRepository: PhotoRepository,private va
 
     fun getFlickrPhotos(query:String) {
         if(TextUtils.isEmpty(query)){
-
+            isUserSearching  = false
         viewModelScope.launch {
              photoRepository.fetchPhotos()
 
         }
         }else{
+            isUserSearching = true
             viewModelScope.launch {
                 photoRepository.searchPhotos(query)
             }

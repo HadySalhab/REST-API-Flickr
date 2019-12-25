@@ -50,6 +50,15 @@ class PhotoListFragment : Fragment() {
         binding.viewModel = photoListViewModel
         binding.setLifecycleOwner(this.viewLifecycleOwner)
         binding.photosRecyclerview.adapter = PhotoListAdapter(displayPhoto)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            if(photoListViewModel.isUserSearching){
+                photoListViewModel.getFlickrPhotos(photoListViewModel.query.value?:"")
+            }
+            else{
+                photoListViewModel.getFlickrPhotos("")
+            }
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
         navController = findNavController()
         return binding.root
     }
@@ -73,7 +82,9 @@ class PhotoListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_item_clear -> {
-                photoListViewModel.changeQueryValue("")
+                photoListViewModel.apply {
+                    changeQueryValue("")
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -87,7 +98,9 @@ class PhotoListFragment : Fragment() {
         searchView.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    photoListViewModel.changeQueryValue(query ?: "")
+                    photoListViewModel.apply {
+                        changeQueryValue(query ?: "")
+                    }
                     onActionViewCollapsed()
                     searchItem.collapseActionView()
                     hideSoftKeyboard()
