@@ -2,6 +2,7 @@ package com.android.flickphoto.ui.li
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView

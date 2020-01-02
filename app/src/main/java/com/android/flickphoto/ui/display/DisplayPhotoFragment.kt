@@ -1,6 +1,7 @@
 package com.android.flickphoto.ui.display
 
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,11 +19,36 @@ import org.koin.core.parameter.parametersOf
  * A simple [Fragment] subclass.
  */
 class DisplayPhotoFragment : Fragment() {
+    private var callbacks:Callbacks? = null
+    interface Callbacks{
+        fun showToolbar()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        callbacks?.showToolbar()
+    }
+
+
+
     private val args by navArgs<DisplayPhotoFragmentArgs>()
     private val displayViewModel:DisplayPhotoViewModel by viewModel {
         parametersOf(args.photo)
     }
     private lateinit var binding:FragmentDisplayPhotoBinding
+
+
+
 
 
     override fun onCreateView(
