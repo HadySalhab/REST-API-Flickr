@@ -44,7 +44,7 @@
                 tools:text="Picture title goes here"
                 android:text="@{photo.title}"
                 android:maxLines="2"
-                android:textAppearance="@style/FlickrPhoto.TextAppearance.PictureTitle" />
+                android:textAppearance="@style/TextAppearance.FlickrPhoto.PictureTitle" />
 
             <TextView
                 android:text="@{photo.ownerName}"
