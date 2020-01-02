@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.android.flickphoto.ui.display.DisplayPhotoFragment
 import com.google.android.material.appbar.AppBarLayout
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity() , DisplayPhotoFragment.Callbacks {
     override fun showToolbar() {
         appBarLayout.setExpanded(true,true)
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController,appBarConfig)
     }
 
 }

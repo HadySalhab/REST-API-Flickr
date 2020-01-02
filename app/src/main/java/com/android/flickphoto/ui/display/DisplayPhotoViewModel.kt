@@ -39,12 +39,8 @@ class DisplayPhotoViewModel(val photo: Photo, val app: Application) : AndroidVie
                         .generate{palette ->
                             _color.value = ColorDrawable(palette?.lightVibrantSwatch?.rgb?:0)
                         }
-
-
                 }
 
             })
-
-
     }
 }

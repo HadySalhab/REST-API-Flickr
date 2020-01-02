@@ -8,7 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
 
 import com.android.flickphoto.R
 import com.android.flickphoto.databinding.FragmentDisplayPhotoBinding
@@ -37,7 +40,9 @@ class DisplayPhotoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         callbacks?.showToolbar()
+
     }
+
 
 
 
