@@ -1,6 +1,7 @@
 package com.android.flickphoto.ui.li
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.flickphoto.R
@@ -24,6 +26,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 
 class PhotoListFragment : Fragment() {
+
+
+
+
     private lateinit var navController: NavController
 
 
@@ -34,6 +40,21 @@ class PhotoListFragment : Fragment() {
     private val displayPhoto: (Photo) -> Unit = { photo ->
         val action = PhotoListFragmentDirections.actionPhotoListFragmentToDisplayPhotoFragment(photo)
         navController.navigate(action)
+    }
+
+    private var callbacks:Callbacks? =null
+    interface Callbacks{
+        fun onPhotoListFragmentDisplayed()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
 
 
@@ -88,7 +109,7 @@ class PhotoListFragment : Fragment() {
                 }
                 true
             }
-            else -> super.onOptionsItemSelected(item)
+            else ->NavigationUI.onNavDestinationSelected(item,navController) || super.onOptionsItemSelected(item)
 
         }
     }
@@ -120,6 +141,11 @@ class PhotoListFragment : Fragment() {
 
         }
 
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        callbacks?.onPhotoListFragmentDisplayed()
     }
 
     fun hideSoftKeyboard() {

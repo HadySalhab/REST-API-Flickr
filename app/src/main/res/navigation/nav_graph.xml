@@ -28,4 +28,9 @@
             android:name="photo"
             app:argType="com.android.flickphoto.models.Photo" />
     </fragment>
+    <fragment
+        android:id="@+id/flickrPhotoSettings"
+        android:name="com.android.flickphoto.ui.preferences.FlickrPhotoSettings"
+        android:label="FlickrPhotoSettings"
+        />
 </navigation>
