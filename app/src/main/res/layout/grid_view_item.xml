@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Author name goes here"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+                android:textAppearance="?attr/textAppearanceCaption" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
