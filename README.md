@@ -51,7 +51,8 @@ The purpose of creating this application was to show how to implement latest fea
 
 <h3>Screenshots: </h3>
 
-![image](https://user-images.githubusercontent.com/51857962/72216468-6af35880-3575-11ea-99c5-86c2d2cc521e.png) ![image](https://user-images.githubusercontent.com/51857962/72216480-924a2580-3575-11ea-95ac-7177165bb3cd.png) ![image](https://user-images.githubusercontent.com/51857962/72216498-d89f8480-3575-11ea-946f-975f7b49cfef.png)  ![image](https://user-images.githubusercontent.com/51857962/72216504-ee14ae80-3575-11ea-8eef-7657c2f10a79.png) ![image](https://user-images.githubusercontent.com/51857962/72216532-4fd51880-3576-11ea-84bb-fc7c35f6aee3.png)![image](https://user-images.githubusercontent.com/51857962/72216510-04bb0580-3576-11ea-8559-27b5bf1429b5.png)  ![image](https://user-images.githubusercontent.com/51857962/72216517-11d7f480-3576-11ea-8a35-c5513fc9db6b.png)
+![image](https://user-images.githubusercontent.com/51857962/72216468-6af35880-3575-11ea-99c5-86c2d2cc521e.png) ![image](https://user-images.githubusercontent.com/51857962/72216480-924a2580-3575-11ea-95ac-7177165bb3cd.png) ![image](https://user-images.githubusercontent.com/51857962/72216498-d89f8480-3575-11ea-946f-975f7b49cfef.png)  ![image](https://user-images.githubusercontent.com/51857962/72216504-ee14ae80-3575-11ea-8eef-7657c2f10a79.png) ![image](https://user-images.githubusercontent.com/51857962/72216532-4fd51880-3576-11ea-84bb-fc7c35f6aee3.png)
+![image](https://user-images.githubusercontent.com/51857962/72216635-d3dbd000-3577-11ea-8aae-62ef3a38bf99.png) ![image](https://user-images.githubusercontent.com/51857962/72216510-04bb0580-3576-11ea-8559-27b5bf1429b5.png)  ![image](https://user-images.githubusercontent.com/51857962/72216517-11d7f480-3576-11ea-8a35-c5513fc9db6b.png)
 
 
 
