@@ -8,7 +8,7 @@ The purpose of creating this application was to show how to implement latest fea
 
 
 
-<h3><b>The folowing features and functions are used:</b></h3>
+<h3><b>The following features and functions are used:</b></h3>
 <ul>
 <li>Search function</li>
 <li>Night mode display</li>
